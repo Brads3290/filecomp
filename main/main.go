@@ -25,6 +25,14 @@ type SessionInfo struct {
 	threads  int
 }
 
+/** BUILD COMMANDS
+Windows:
+	go build -o bin/filecomp.exe filecomp/main
+
+Unix
+	go build -o bin/filecomp filecomp/main
+ */
+
 func main() {
 	iptOne := flag.String("s1", "", "Source file or directory #1")
 	iptTwo := flag.String("s2", "", "Source file or directory #2")

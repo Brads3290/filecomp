@@ -10,7 +10,19 @@ The following output formats are supported:
  * Plain text, to stdout (default)
  * XML
  
-### Usage
+## Installation
+Filecomp simply needs to be built using the Go SDK:
+```$xslt
+# Windows:
+go build -o bin/filecomp.exe filecomp/main
+
+# Unix
+go build -o bin/filecomp filecomp/main
+```
+The Windows/Unix build commands are identical except for the output file name.
+
+ 
+## Usage
 The simplest usage is as follows:
 ```
 filecomp -s1 /path/to/src/one -s2 /path/to/src/two
@@ -20,7 +32,7 @@ If the paths are directories, they will be recursively walked for files with the
 
 If the paths point to files, then the two files will be compared.
 
-#### Output Formats
+### Output Formats
 The default output is to stdout, and looks similar to the following:
 ```
 ===== SAME FILES =====
@@ -46,7 +58,7 @@ To output to XML, use the `-o <filename>` flag. E.g. `filecomp -s1 /path/to/src/
 </fileList>
 ```
 
-#### Hash Type
+### Hash Type
 To change the hash type, use the `-h <hash_type>` flag. The following values can be used for `<hash_type>`:
 * `md5`
 * `sha1`
@@ -55,5 +67,5 @@ To change the hash type, use the `-h <hash_type>` flag. The following values can
 
 Adding support for new hash types is also possible. Simply add a case to the switch statement in `GetHashFunc` at the bottom of `main/main.go`, and return a `func() hash.Hash`, which should return your desired hash algorithm.
 
-#### Multithreading
+### Multithreading
 Filecomp will run at least two threads when calculating hashes: at least one worker thread, and the main thread which will allocate files to the worker(s). To increase the number of workers, use the `-t <thread_count>` flag. If you pass in a value less than 1, **it will be ignored.**
